@@ -71,14 +71,33 @@ Fill out the following table, mapping decimal numbers `0` through `15` to their 
 |---------|------------------------|
 | 0       | 0000                   |
 | 1       | 0001                   |
-| ...     | ...                    |
-| 15      | ????                   |
+| 2       | 0010                   |
+| 3       | 0011                   |
+| 4       | 0100                   |
+| 5       | 0101                   |
+| 6       | 0110                   |
+| 7       | 0111                   |
+| 8       | 1000                   |
+| 9       | 1001                   |
+| 10      | 1010                   |
+| 11      | 1011                   |
+| 12      | 1100                   |
+| 13      | 1101                   |
+| 14      | 1110                   |
+| 15      | 1111                   |
+
 
 **How many binary digits (bits) are needed?**
+Explain how to calculate the number of bits required: 4 bits werden benötigt, da 2^n=16 wobei n=4 ;  16 da die Anzahl werte 16 sind (0 bis 15)
+->Um herauszufinden, wie viele Bits man braucht, schaut man, wie viele verschiedene Werte man darstellen will. Dann nimmt man die kleinste Zweierpotenz (also 2 hoch irgendwas), die mindestens so groß ist wie diese Anzahl. Der Exponent zeigt dann, wie viele Bits man braucht.
 
-Explain how to calculate the number of bits required:
+Es gibt mehrere Möglichkeiten (hier Divisionsrestverfahren) 
 <details>
-<summary>Your Answer</summary>
+<summary>  Beispiel: 13:2=6 Rest 1
+                     6:2=3  Rest 0
+                     3:2=1  Rest 1
+                     1:2=0  Rest 1     //   Jetzt liest man die Reste von unten nach oben: 
+         13(10) = 1101(2) </summary>
 Erase this text and write your answer here!
 </details>
 
@@ -107,33 +126,80 @@ Refer to the truth table of a 1-bit full adder:
 #### Your Task
 Create a truth table for a **2-bit adder** without carry-in. What are the possible inputs and outputs?
 
->   Your
->
->   table
->
->   goes
->
->   here!
+| B1 | B0 | A1 | A0 | Q2 | Q1 | Q0 | 
+|----|----|----|----|----|----|----|
+| 0  | 0  | 0  | 0  |  0 |  0 |  0 |
+| 0  | 0  | 0  | 1  |  0 |  0 |  1 |
+| 0  | 0  | 1  | 0  |  0 |  1 |  0 |
+| 0  | 0  | 1  | 1  |  0 |  1 |  1 |
+| 0  | 1  | 0  | 0  |  0 |  0 |  1 |
+| 0  | 1  | 0  | 1  |  0 |  1 |  0 |
+| 0  | 1  | 1  | 0  |  0 |  1 |  1 |
+| 0  | 1  | 1  | 1  |  1 |  0 |  0 |
+| 1  | 0  | 0  | 0  |  0 |  1 |  0 |
+| 1  | 0  | 0  | 1  |  0 |  1 |  1 |
+| 1  | 0  | 1  | 0  |  1 |  0 |  0 |
+| 1  | 0  | 1  | 1  |  1 |  0 |  1 |
+| 1  | 1  | 0  | 0  |  0 |  1 |  1 |
+| 1  | 1  | 0  | 1  |  1 |  0 |  0 |
+| 1  | 1  | 1  | 0  |  1 |  0 |  1 |
+| 1  | 1  | 1  | 1  |  1 |  1 |  0 |
 
----
+Eingaänge: 16 Kombinationen
+Ausgänge : 7 Kombinationen (Q2 - Q0)
+
+
 
 ### Task 3: Boolean Equations via Karnaugh Maps
 Use the [K-Map method](https://github.com/STEMgraph/4b957490-badf-4264-b9f2-1b5aa370f36e) to derive Boolean equations for each output bit in your 2-bit adder.
 
-1. Fill out Karnaugh Maps
+1. Fill out Karnaugh Maps -> Ich konnte die Aufgabe leider nicht lösen, da unklar ist, ob die Übung im Link oder die im Task gemeint ist – beide behandeln unterschiedliche Themen. Zudem konnte ich nach dem Klick auf „commit changes“ nichts mehr bearbeiten, da der Stift deaktiviert wurde.
 2. Write down an equation for each cell marked `1`
 3. Combine them using OR gates
 4. Minimize the equations
 
+Q0
+
+| B  | A  |    |    |    |
+|----|----|----|----|----|
+|    | 00 | 01 | 11 |  10|
+| 00 | 0  | 1  | 1  |  0 |
+| 01 | 1  | 0  | 0  |  1 |
+| 11 | 1  | 0  | 0  |  1 |
+| 10 | 0  | 1  | 1  |  0 |
+
+
+Q1
+
+| B  | A  |    |    |    |
+|----|----|----|----|----|
+|    | 00 | 01 | 11 |  10|
+| 00 | 0  | 0  | 1  |  1 |
+| 01 | 0  | 1  | 0  |  1 |
+| 11 | 1  | 0  | 1  |  0 |
+| 10 | 1  | 1  | 0  |  0 |
+
+
+Q2
+
+| B  | A  |    |    |    |
+|----|----|----|----|----|
+|    | 00 | 01 | 11 |  10|
+| 00 | 0  | 0  | 0  |  0 |
+| 01 | 0  | 0  | 1  |  0 |
+| 11 | 0  | 1  | 1  |  1 |
+| 10 | 0  | 0  | 1  |  1 |
+
+
+
 <details>
 <summary>The final functions</summary>
 
-Q<sub>0</sub> = .......
+Q<sub>0</sub> = A0 v B0
 
-Q<sub>1</sub> = .......
+Q<sub>1</sub> = (A1 v B1) v (A0 + B0)
 
-C<sub>out</sub> = .......
-
+C<sub>out</sub> = Um ehrlich zu sein habe ich die 90 Minuten hier schon überschritten gehabt, habe die Aufgabe aber noch zu Ende gemacht. 
 </details>
 
 ---
